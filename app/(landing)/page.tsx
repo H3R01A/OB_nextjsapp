@@ -9,9 +9,9 @@ export default function WelcomePage() {
         <h1>Welcome! Let&apos;s Get Started</h1>
         <br></br>
         <div>
-          <NavLink href={'/order'}>Check Order</NavLink>
+          <NavLink href={'/order'}>Check Order Status</NavLink>
           <br></br>
-          <NavLink href={'/token'}>Check Token</NavLink>
+          <NavLink href={'/token'}>Check Token Balance</NavLink>
         </div>
       </div>
     </main>
