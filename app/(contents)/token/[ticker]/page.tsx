@@ -7,12 +7,10 @@ type PageProps = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export default async function TickerPage({ params }: PageProps) {
+export default async function TickerPage({ params, searchParams}: PageProps) {
+  
   const ticker = params.ticker.toLowerCase();
-  //!ORDI WALLET ADDRESS TO PROVE API CALL WORKS!
-  const address =
-    'bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06';
-
+  const address = searchParams?.address;
   const data = await getTickerData(ticker);
   const tickerInfo = data.result;
 
@@ -24,7 +22,15 @@ export default async function TickerPage({ params }: PageProps) {
     );
   }
 
-  const balanceData = await getTickerBalance(address, ticker);
+  if(!address){
+    return (<div>
+      <p>Please enter a valid wallet address and try again</p>
+    </div>)
+  }
+
+   //'bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06'
+
+  const balanceData = await getTickerBalance(address as string, ticker);
 
   return (
     <main className={classes.main}>
