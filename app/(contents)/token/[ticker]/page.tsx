@@ -1,5 +1,4 @@
 import styles from '../../../page.module.css';
-import { headers } from 'next/headers';
 
 type PageProps = {
   params: { ticker: string };
@@ -45,7 +44,7 @@ async function getTickerBalance(address: String, ticker: String) {
   return await response.json();
 }
 
-export default async function TokenPage({ params }: PageProps) {
+export default async function TickerPage({ params }: PageProps) {
   const ticker = params.ticker.toLowerCase();
   //!ORDI WALLET ADDRESS TO PROVE API CALL WORKS!
   const address =
