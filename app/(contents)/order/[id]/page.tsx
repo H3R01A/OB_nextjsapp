@@ -7,20 +7,10 @@ type PageProps = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-
 export default async function OrderPage({ params }: PageProps) {
-  
   const orderID = params.id;
-  
-  //const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e5';
-
-  //!order to trigger error
-  //const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e4';
 
   const orderData = await getOrderData(orderID);
-
-  //!console log to see what data is returned
-  //console.log(orderData);
 
   if (orderData.status !== 'ok') {
     return (

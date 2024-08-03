@@ -28,8 +28,6 @@ export default async function TickerPage({ params, searchParams}: PageProps) {
     </div>)
   }
 
-   //'bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06'
-
   const balanceData = await getTickerBalance(address as string, ticker);
 
   return (
