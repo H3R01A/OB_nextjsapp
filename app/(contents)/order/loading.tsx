@@ -1,3 +1,3 @@
-export default function OrderLoading() {
-  return <h1>Loading order information...</h1>;
+export default function OrderPageLoading() {
+  return <h1>Loading Order Page...</h1>;
 }
