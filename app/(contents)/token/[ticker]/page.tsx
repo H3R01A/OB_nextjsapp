@@ -1,48 +1,11 @@
-import styles from '../../../page.module.css';
+import '../../../globals.css';
+import classes from './page.module.css';
+import { getTickerData, getTickerBalance } from '@/actions/actions';
 
 type PageProps = {
   params: { ticker: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 };
-
-async function getTickerData(ticker: String) {
-  
-  
-  const headers: HeadersInit = {
-    'x-api-key': process.env.API_KEY ?? '',
-  };
-  
-  const response = await fetch(
-    `https://api.ordinalsbot.com/opi/v1/brc20/ticker_info?ticker=${ticker}`,
-    {
-      headers,
-    }
-  );
-
-  if (!response.ok) {
-    new Error('Error with the call');
-  }
-
-  return await response.json();
-}
-
-async function getTickerBalance(address: String, ticker: String) {
-  const headers: HeadersInit = {
-    'x-api-key': process.env.API_KEY ?? '',
-  };
-  const response = await fetch(
-    `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06&ticker=${ticker}`,
-    {
-      headers,
-    }
-  );
-
-  if (!response.ok) {
-    new Error('Error with the call');
-  }
-
-  return await response.json();
-}
 
 export default async function TickerPage({ params }: PageProps) {
   const ticker = params.ticker.toLowerCase();
@@ -64,7 +27,7 @@ export default async function TickerPage({ params }: PageProps) {
   const balanceData = await getTickerBalance(address, ticker);
 
   return (
-    <main className={styles.main}>
+    <main className={classes.main}>
       <div>
         <h2>Ticker: {tickerInfo.original_tick}</h2>
         <p>Max Supply: {tickerInfo.max_supply}</p>

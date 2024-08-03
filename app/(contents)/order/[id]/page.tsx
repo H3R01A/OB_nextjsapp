@@ -1,18 +1,18 @@
-import styles from '../../../page.module.css';
+import '../../../globals.css';
+import classes from './page.module.css';
+import { getOrderData } from '@/actions/actions';
 
-async function getOrderData(id: String) {
-  const response = await fetch(`https://api.ordinalsbot.com/order?id=${id}`);
-
-  if (!response.ok) {
-    new Error('Error with the call');
-  }
-
-  return await response.json();
-}
+type PageProps = {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 
-export default async function OrderPage() {
-  const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e5';
+export default async function OrderPage({ params }: PageProps) {
+  
+  const orderID = params.id;
+  
+  //const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e5';
 
   //!order to trigger error
   //const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e4';
@@ -32,7 +32,7 @@ export default async function OrderPage() {
   }
 
   return (
-    <main className={styles.main}>
+    <main className={classes.main}>
       <div>
         <h2>Order Info</h2>
         <p>Order ID: {orderData.id}</p>
