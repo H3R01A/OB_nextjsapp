@@ -1,12 +1,22 @@
 import styles from '../../../page.module.css';
+import { headers } from 'next/headers';
+
+type PageProps = {
+  params: { ticker: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 async function getTickerData(ticker: String) {
+  
+  
+  const headers: HeadersInit = {
+    'x-api-key': process.env.API_KEY ?? '',
+  };
+  
   const response = await fetch(
     `https://api.ordinalsbot.com/opi/v1/brc20/ticker_info?ticker=${ticker}`,
     {
-      headers: {
-        'x-api-key': process.env.API_KEY,
-      },
+      headers,
     }
   );
 
@@ -18,12 +28,13 @@ async function getTickerData(ticker: String) {
 }
 
 async function getTickerBalance(address: String, ticker: String) {
+  const headers: HeadersInit = {
+    'x-api-key': process.env.API_KEY ?? '',
+  };
   const response = await fetch(
     `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06&ticker=${ticker}`,
     {
-      headers: {
-        'x-api-key': process.env.API_KEY,
-      },
+      headers,
     }
   );
 
@@ -34,7 +45,7 @@ async function getTickerBalance(address: String, ticker: String) {
   return await response.json();
 }
 
-export default async function TokenPage({ params }) {
+export default async function TokenPage({ params }: PageProps) {
   const ticker = params.ticker.toLowerCase();
   //!ORDI WALLET ADDRESS TO PROVE API CALL WORKS!
   const address =
@@ -42,8 +53,6 @@ export default async function TokenPage({ params }) {
 
   const data = await getTickerData(ticker);
   const tickerInfo = data.result;
-
-  console.log(tickerInfo);
 
   if (!tickerInfo) {
     return (
@@ -54,7 +63,7 @@ export default async function TokenPage({ params }) {
   }
 
   const balanceData = await getTickerBalance(address, ticker);
-  
+
   return (
     <main className={styles.main}>
       <div>
@@ -70,7 +79,10 @@ export default async function TokenPage({ params }) {
         ) : (
           <>
             <p>Your Overall Balance: {balanceData.result[0].overall_balance}</p>
-            <p>Available Balance To Transer: {balanceData.result[0].available_balance}</p>
+            <p>
+              Available Balance To Transer:{' '}
+              {balanceData.result[0].available_balance}
+            </p>
           </>
         )}
       </div>

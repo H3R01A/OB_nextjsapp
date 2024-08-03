@@ -11,7 +11,7 @@ async function getOrderData(id: String) {
 }
 
 //TODO - clean up and see what other
-export default async function TokenPage({ params }) {
+export default async function OrderPage() {
   const orderID = 'c411ca33-53dd-4d4f-b959-6c6dffcc88e5';
 
   //!order to trigger error
