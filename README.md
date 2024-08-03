@@ -25,6 +25,8 @@ You are able to select which part of the app you want to navigate to! There are 
 
 >IMPORTANT!: In order to visualize the current bitcoin price, you will need a CoinGecko API key. If you have access to another source, feel free to change API KEY referenced in the `getBitcoinPriceData` function under the `actions` directory.
 
+>NOTE: Bicoin Price should update every min and the current Bitcoin block should updated every 10 mins based on caching implementation.
+
 ### Order Status
 Enter an order id and be presented information on the order such as:
 - Payment Status
@@ -36,6 +38,11 @@ And more!
 
 ### Token Balance
 Enter a ticker (ex. TRIO) and a wallet address to check the current balance and available balance to transer of a BRC20 token. You will be presented with information such as:
+- Max Supply
+- Remaining Supply
+- Limit Per Mint
+- Current Block Height
+- Wallet overall balance and transferable balance (if any)
 
 >IMPORTANT! OrdinalsBot API Key required
 
@@ -56,7 +63,8 @@ Throughout the codebase you will find the use of the following implementations f
 ## Future DLC
 
 - Enhanced Error handling and Typing
-- Visuliszations of ticker and ticker information
-- Updated styling
-- Implement caching on 
+- Ability to connect your Web3 wallet
+- Visuliszations for BRC20 ticker and order information
+- Updated overall styling
+
 
