@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation';
 
 export async function handleTickerSubmission(formData: FormData) {
   const tickerInput = formData.get('ticker');
-  redirect(`/token/${tickerInput}`);
+  const userWallet = formData.get('address');
+  redirect(`/token/${tickerInput}?address=${userWallet}`);
 }
 
 export async function handleOrderSubmission(formData: FormData) {
@@ -49,14 +50,12 @@ export async function getTickerBalance(address: String, ticker: String) {
   return await response.json();
 }
 
-
 export async function getOrderData(id: String) {
-    const response = await fetch(`https://api.ordinalsbot.com/order?id=${id}`);
-  
-    if (!response.ok) {
-      new Error('Error with the call');
-    }
-  
-    return await response.json();
+  const response = await fetch(`https://api.ordinalsbot.com/order?id=${id}`);
+
+  if (!response.ok) {
+    new Error('Error with the call');
   }
-  
+
+  return await response.json();
+}
