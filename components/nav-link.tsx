@@ -12,8 +12,10 @@ export default function NavLink({
 }>) {
   const path = usePathname();
 
+  const isCurrentlyActive = path.startsWith(href as string)
+
   return (
-    <Link href={href as URL} className={path.startsWith(href as string) ? 'active' : undefined}>
+    <Link href={href as URL} className={isCurrentlyActive ? 'active' : undefined}>
       {children}
     </Link>
   );
