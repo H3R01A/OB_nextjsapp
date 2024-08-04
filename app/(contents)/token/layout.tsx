@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'Token Search',
-  description: 'Page to find out more information about BRC20 tokens',
+  description: 'Page to find out more information about BRC20 tokens and current balances',
 }
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
       <MainHeader />
         {children}
         </body>

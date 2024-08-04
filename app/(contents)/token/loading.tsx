@@ -1,4 +1,4 @@
-export default function TokenLoading(){
+export default function TokenPageLoading(){
 
-    return <h1>Loading token information...</h1>
+    return <h1>Loading Token Page...</h1>
 }
