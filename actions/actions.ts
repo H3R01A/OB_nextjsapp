@@ -85,7 +85,7 @@ export async function getTickerBalance(
     'x-api-key': process.env.OB_API_KEY ?? '',
   };
   const response = await fetch(
-    `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=${address}=${ticker}`,
+    `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=${address}&ticker=${ticker}`,
     {
       headers,
     }
