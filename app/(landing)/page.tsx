@@ -5,7 +5,6 @@ import { getBicoinBlockData, getBitcoinPriceData } from '@/actions/actions';
 export default async function WelcomePage() {
   const priceData = await getBitcoinPriceData();
   const currentBitcoinPrice = priceData.market_data.current_price.usd;
-
   const currentBitcoinBlock = await getBicoinBlockData();
 
   return (
@@ -22,12 +21,12 @@ export default async function WelcomePage() {
         <div>
           Current Bitcoin price:{' '}
           {!currentBitcoinPrice
-            ? 'Current bitcoin price information not available'
+            ? 'Current bitcoin price is not available'
             : `$${currentBitcoinPrice}`}
           <br></br>
           Current Bitcoin Block:{' '}
           {!currentBitcoinBlock
-            ? 'Current block information not available'
+            ? 'Current block information is not available'
             : `${currentBitcoinBlock}`}
         </div>
       </div>
