@@ -3,6 +3,7 @@ import 'server-only';
 import xss from 'xss';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { WalletBalance, TickerInfo } from '../utils/types';
 
 export async function getBicoinBlockData() {
   const response = await fetch(`https://blockchain.info/q/getblockcount`, {
@@ -31,7 +32,9 @@ export async function getBitcoinPriceData() {
   return response.json();
 }
 
-export async function handleTickerSubmission(formData: FormData) {
+export async function handleTickerSubmission(
+  formData: FormData
+): Promise<void> {
   let tickerInput = formData.get('ticker');
   const userWallet = formData.get('address');
 
@@ -50,12 +53,12 @@ export async function handleTickerSubmission(formData: FormData) {
   redirect(`/token/${sanitizedTickerInput}?address=${sanitizeduserWallet}`);
 }
 
-export async function handleOrderSubmission(formData: FormData) {
+export async function handleOrderSubmission(formData: FormData): Promise<void> {
   const userOrder = formData.get('order');
   redirect(`/order/${userOrder}`);
 }
 
-export async function getTickerData(ticker: String) {
+export async function getTickerData(ticker: string): Promise<TickerInfo> {
   const headers: HeadersInit = {
     'x-api-key': process.env.OB_API_KEY ?? '',
   };
@@ -74,12 +77,15 @@ export async function getTickerData(ticker: String) {
   return await response.json();
 }
 
-export async function getTickerBalance(address: String, ticker: String) {
+export async function getTickerBalance(
+  address: string,
+  ticker: string
+): Promise<WalletBalance> {
   const headers: HeadersInit = {
     'x-api-key': process.env.OB_API_KEY ?? '',
   };
   const response = await fetch(
-    `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06&ticker=${ticker}`,
+    `https://api.ordinalsbot.com/opi/v1/brc20/get_current_balance_of_wallet?address=${address}=${ticker}`,
     {
       headers,
     }
@@ -92,7 +98,7 @@ export async function getTickerBalance(address: String, ticker: String) {
   return await response.json();
 }
 
-export async function getOrderData(id: String) {
+export async function getOrderData(id: string) {
   const response = await fetch(`https://api.ordinalsbot.com/order?id=${id}`);
 
   if (!response.ok) {
