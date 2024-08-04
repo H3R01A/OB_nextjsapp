@@ -1,4 +1,20 @@
-export default function TokenPageLoading(){
+'use client';
 
-    return <h1>Loading Token Page...</h1>
+import { ThreeCircles } from 'react-loader-spinner';
+
+export default function TokenPageLoading() {
+  return (
+    <>
+      <h1>Loading Token Page...</h1>
+      <ThreeCircles
+        visible={true}
+        height="100"
+        width="100"
+        color="#ffffff"
+        ariaLabel="three-circles-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      />
+    </>
+  );
 }
