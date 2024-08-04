@@ -8,6 +8,17 @@ First install dependencies
 npm install
 ```
 
+
+Create a `.env` file with the following API keys:
+```bash
+OB_API_KEY
+BITCOIN_PRICE
+```
+>IMPORTANT!: In order to utilize the application, please obtain an active API key from the OrdinalsBot team for the `OB_API_KEY` API key and an active API key from a data source of your choice for the  `BITCOIN_PRICE` API key.
+
+
+
+
 Now run the development server:
 
 ```bash
@@ -16,7 +27,6 @@ npm run dev
 
 You will be greeted to a welcome page where you are able to navigate to a "Order Status" page and/or a "Token Balance" page.
 
->IMPORTANT!: In order to utilize application, please obtain an active API key from the OrdinalsBot team.
 
 ## Getting to know the app
 
@@ -25,7 +35,7 @@ You are able to select which part of the app you want to navigate to! There are 
 >NOTE: Bicoin price should update every 1 minute and the current Bitcoin block should update every 10 mins based on caching implementation.
 
 
->IMPORTANT!: In order to visualize the current bitcoin price, you will need access to APIs that will provide both pieces of data.Please refer to the `getBitcoinPriceData` and `getBicoinBlockData` server action functions within the `actions` directory for more information on how to configure your data fetch calls.
+>IMPORTANT!: In order to visualize the current bitcoin price, you will need access to an API that will provide the data. Please refer to the `getBitcoinPriceData` server action functions within the `actions` directory for more information on how to configure your data fetch calls.
 
 
 
@@ -66,7 +76,7 @@ Throughout the codebase you will find the use of the following implementations f
 
 - Enhanced Error handling and Typing
 - Ability to connect your Web3 wallet
-- Visuliszations for BRC20 ticker and order information
+- Added visualizations to enhance review of BRC20 ticker and order information
 - Updated overall styling
 
 
