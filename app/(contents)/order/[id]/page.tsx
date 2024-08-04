@@ -2,17 +2,22 @@ import '../../../globals.css';
 import classes from './page.module.css';
 import { getOrderData } from '@/actions/actions';
 
-type PageProps = {
+interface PageProps {
   params: { id: string };
   searchParams?: { [key: string]: string | string[] | undefined };
-};
+}
 
-export default async function OrderPage({ params }: PageProps) {
-  const orderID = params.id;
+enum OrderStatus {
+  OK = "ok",
+  ERROR = "error",
+}
+export default async function OrderPage(props: PageProps) {
+  const orderID = props.params.id;
 
   const orderData = await getOrderData(orderID);
+  console.log(orderData);
 
-  if (orderData.status !== 'ok') {
+  if (orderData.status === OrderStatus.ERROR) {
     return (
       <>
         <p>Sorry something unexpected happened</p>
