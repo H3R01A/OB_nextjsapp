@@ -8,7 +8,8 @@ export default function OrderPage() {
     <>
     <h1>Enter Order ID below to check the status of your order</h1>
     <form action={handleOrderSubmission}>
-        <input type='text' name='order' />
+        Order ID: <input type='text' name='order' />
+        <br></br>
         <button>Check</button>
       </form>
     </>
