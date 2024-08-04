@@ -2,34 +2,41 @@ import '../../../globals.css';
 import classes from './page.module.css';
 import { getTickerData, getTickerBalance } from '@/actions/actions';
 
-type PageProps = {
+interface PageProps {
   params: { ticker: string };
   searchParams?: { [key: string]: string | string[] | undefined };
-};
+}
 
-export default async function TickerPage({ params, searchParams}: PageProps) {
-  
-  const ticker = params.ticker.toLowerCase();
-  const address = searchParams?.address;
-  const data = await getTickerData(ticker);
-  const tickerInfo = data.result;
+export default async function TickerPage(props: PageProps) {
+  const ticker = props.params.ticker.toLowerCase();
+  const address = props.searchParams?.address;
+  const tickerData = await getTickerData(ticker);
 
-  if (!tickerInfo) {
+  if (tickerData.error) {
     return (
       <div>
-        <p>Unfortinately BRC-20 Token is not available yet</p>
+        <p>
+          Unfortinately the BRC20 Token you entered is not available yet in our
+          application
+        </p>
+        <p>
+          Please submit a request at customersupport@ordinalsbot.com for us to
+          add support for this token
+        </p>
       </div>
     );
   }
 
-  if(!address){
-    return (<div>
-      <p>Please enter a valid wallet address and try again</p>
-    </div>)
+  if (!address) {
+    return (
+      <div>
+        <p>Please enter a valid wallet address and try again</p>
+      </div>
+    );
   }
 
   const balanceData = await getTickerBalance(address as string, ticker);
-
+  const tickerInfo = tickerData.result;
   return (
     <main className={classes.main}>
       <div>
@@ -41,7 +48,9 @@ export default async function TickerPage({ params, searchParams}: PageProps) {
         <br></br>
         <h2>Transferable Balance</h2>
         {!balanceData.result ? (
-          <p>wallet has a 0 balance of the token</p>
+          <p>
+            Wallet has a 0 balance of the {`${tickerInfo.original_tick}`} token
+          </p>
         ) : (
           <>
             <p>Your Overall Balance: {balanceData.result[0].overall_balance}</p>
