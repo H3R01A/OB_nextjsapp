@@ -13,8 +13,10 @@ export async function getBicoinBlockData() {
 }
 
 export async function getBitcoinPriceData() {
+  // Can be configured to use choice of API for data fetching current bitcoin price.
+  // IMPORTANT! Make sure to change the header key name to match the required key name for API
   const headers: HeadersInit = {
-    'x-cg-demo-api-key': process.env.COINGECKO_API_KEY ?? '',
+    'x-cg-demo-api-key': process.env.BITCOIN_PRICE ?? '',
   };
 
   const response = await fetch(
