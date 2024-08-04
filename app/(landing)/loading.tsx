@@ -1,4 +1,4 @@
 export default function WelcomePageLoading(){
 
-    return <h1>Bringing you back home...</h1>
+    return <h1>Teleporting you back to basecamp...</h1>
 }
