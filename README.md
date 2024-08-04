@@ -1,7 +1,7 @@
 # Welcome to OB Next! 
 Your one stop shop for checking your order statues and BRC20 token balances. Please read on to find out more how to get started.
 
-## Getting Started
+## Getting started
 
 First install dependencies
 ```bash
@@ -59,7 +59,7 @@ Enter a BR20 ticker (ex. TRIO) and an active wallet address to check the current
 >IMPORTANT! OrdinalsBot API Key required
 
 
-## Thoughts behind the Code
+## Thoughts behind the code
 Throughout the codebase you will find the use of the following implementations for the respective reasons:
 
 - Route Grouping to provide different layouts and enhance the user experience.
