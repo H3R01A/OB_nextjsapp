@@ -8,14 +8,13 @@ interface PageProps {
 }
 
 enum OrderStatus {
-  OK = "ok",
-  ERROR = "error",
+  OK = 'ok',
+  ERROR = 'error',
 }
 export default async function OrderPage(props: PageProps) {
   const orderID = props.params.id;
 
   const orderData = await getOrderData(orderID);
-  console.log(orderData);
 
   if (orderData.status === OrderStatus.ERROR) {
     return (
