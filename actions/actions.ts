@@ -5,7 +5,9 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 export async function getBicoinBlockData() {
-  const response = await fetch(`https://blockchain.info/q/getblockcount`);
+  const response = await fetch(`https://blockchain.info/q/getblockcount`, {
+    next: { revalidate: 600 },
+  });
   revalidatePath('/');
   return response.json();
 }
@@ -19,6 +21,7 @@ export async function getBitcoinPriceData() {
     `https://api.coingecko.com/api/v3/coins/bitcoin`,
     {
       headers,
+      next: { revalidate: 60 },
     }
   );
 
