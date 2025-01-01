@@ -1,5 +1,4 @@
 import '../../../globals.css';
-import classes from './page.module.css';
 import { getTickerData, getTickerBalance } from '@/actions/actions';
 
 interface PageProps {
@@ -38,7 +37,7 @@ export default async function TickerPage(props: PageProps) {
   const balanceData = await getTickerBalance(address as string, ticker);
   const tickerInfo = tickerData.result;
   return (
-    <main className={classes.main}>
+    <main>
       <div>
         <h2>Ticker: {tickerInfo.original_tick}</h2>
         <p>Max Supply: {tickerInfo.max_supply}</p>

@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import '../../globals.css';
 
 import MainHeader from "@/components/main-header"
 
@@ -16,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="bg-zinc-800">
       <MainHeader />
         {children}
         </body>

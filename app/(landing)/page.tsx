@@ -1,6 +1,6 @@
-import styles from '../page.module.css';
 import NavLink from '@/components/nav-link';
 import { getBicoinBlockData, getBitcoinPriceData } from '@/actions/actions';
+import '../globals.css';
 
 export default async function WelcomePage() {
   const priceData = await getBitcoinPriceData();
@@ -8,22 +8,22 @@ export default async function WelcomePage() {
   const currentBitcoinBlock = await getBicoinBlockData();
 
   return (
-    <main className={styles.main}>
-      <div>
-        <h1>Welcome! Let&apos;s Get Started</h1>
-        <br></br>
-        <div>
+    <main>
+      <div className="text-white flex flex-col items-center text-2xl space-y-6">
+        <h1>Welcome to OB Next! Let&apos;s Get Started!</h1>
+        <div className="text-blue-200 hover:underline hover:text-blue-700 text-xl">
           <NavLink href={'/order'}>Check Order Status</NavLink>
-          <br></br>
+        </div>
+        <div className="text-blue-200 hover:text-blue-700 hover:underline text-xl">
           <NavLink href={'/token'}>Check Token Balance</NavLink>
         </div>
-        <br></br>
-        <div>
+        <div className='text-xl'>
           Current Bitcoin price:{' '}
           {!currentBitcoinPrice
             ? 'Current bitcoin price is not available'
             : `$${currentBitcoinPrice}`}
-          <br></br>
+        </div>
+        <div className='text-xl'>
           Current Bitcoin Block:{' '}
           {!currentBitcoinBlock
             ? 'Current block information is not available'
