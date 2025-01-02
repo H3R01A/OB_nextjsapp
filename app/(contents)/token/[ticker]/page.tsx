@@ -3,8 +3,10 @@ import {
   getTickerData,
   getTickerBalance,
   handleAddTokenToDB,
+  handleDeleteTokenFrmDB,
 } from '@/actions/actions';
 import { findTokenInDB } from '@/db/supabase/utils/database-helpers';
+import { Button } from '@/components/ui/button';
 
 interface PageProps {
   params: { ticker: string };
@@ -15,8 +17,10 @@ export default async function TickerPage(props: PageProps) {
   const ticker = props.params.ticker.toLowerCase();
   const address = props.searchParams?.address;
   const tickerData = await getTickerData(ticker);
+
   //fetch to see if token is in database, if so fill in a heart or something
   const tokenFavorited = await findTokenInDB(ticker);
+
   let userBalance = '';
 
   if (tickerData.error) {
@@ -55,7 +59,7 @@ export default async function TickerPage(props: PageProps) {
 
   return (
     <main>
-      <div className="text-white">
+      <div className="mt-20 flex flex-col items-center text-white">
         <h2>Ticker: {tickerInfo.original_tick}</h2>
         <p>Max Supply: {tickerInfo.max_supply}</p>
         <p>Remaining Supply: {tickerInfo.max_supply}</p>
@@ -103,11 +107,19 @@ export default async function TickerPage(props: PageProps) {
             readOnly
           ></input>
 
-          <button>Add to token favorite</button>
+          <Button>Add to token favorite</Button>
         </form>
-        {/* <form action={handleAdd}>
-          <button onClick={handleDelete}>Remove token from favorite</button>
-        </form> */}
+        <div className='mt-4'>
+        <form action={handleDeleteTokenFrmDB}>
+          <input
+            hidden={true}
+            value={tickerInfo.original_tick}
+            name={'ticker'}
+            readOnly
+          ></input>
+          <Button>Remove Token from Favorites</Button>
+        </form>
+        </div>
       </div>
     </main>
   );

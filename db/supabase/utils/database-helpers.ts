@@ -11,21 +11,24 @@ export async function addTokenToDB(
     .from('tokens')
     .insert({ ticker, name, user_balance, total_supply });
 
-  if (error) {
-    return error;
-  }
+    if (error) {
+      throw Error('error attempting to add tokens to database. Look into error: ', error)
+    }
 
   return data;
 }
 
 export async function findTokenInDB(ticker: string) {
   const supabase = await createClient();
-  const response = await supabase
+  const {data,error} = await supabase
     .from('tokens')
     .select('*')
-    .eq(`${ticker}`, ticker);
+    .eq("ticker", ticker);
 
-  return response;
+    if(data?.length === 0 || data === null || error){
+      return false
+    }
+  return true
 }
 
 export async function getFavoritesFrmDB() {
@@ -49,9 +52,9 @@ export async function updateTokenInDB(ticker: string, update: string) {
     .update({ ticker })
     .eq(`${update}`, update);
 
-  if (error) {
-    return error;
-  }
+    if (error) {
+      throw Error('error attempting to update database. Look into error: ', error)
+    }
 
   return data;
 }

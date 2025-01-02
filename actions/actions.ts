@@ -114,8 +114,6 @@ export async function getOrderData(id: string) {
 }
 
 export async function handleAddTokenToDB(formData: FormData) {
-
-  console.log('entered handleAddTokenToDB')
   const ticker = formData.get('ticker');
   const name = formData.get('name');
   const user_balance = formData.get('user_balance');
@@ -138,4 +136,15 @@ export async function handleAddTokenToDB(formData: FormData) {
   }
 
   return await addTokenToDB(ticker, name, user_balance, total_supply);
+}
+
+
+export async function handleDeleteTokenFrmDB(formData: FormData) {
+  const ticker = formData.get('ticker');
+
+  if(typeof ticker !== "string"){
+    throw new Error('Invalid ticker input');
+  }
+
+  return await deleteTokenFrmDB(ticker);
 }
