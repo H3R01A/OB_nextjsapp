@@ -5,13 +5,13 @@ export default function MainHeader() {
     <header id="main-header">
       <nav>
         <ul>
-          <li>
+          <li className="text-blue-200 hover:text-blue-700 hover:underline">
             <NavLink href={'/'}>Home</NavLink>
           </li>
-          <li>
+          <li className="text-blue-200 hover:text-blue-700 hover:underline">
             <NavLink href={'/token'}>Check Token Balance</NavLink>
           </li>
-          <li>
+          <li className="text-blue-200 hover:text-blue-700 hover:underline">
             <NavLink href={'/order'}>Check Order Status</NavLink>
           </li>
         </ul>

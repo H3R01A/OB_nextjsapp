@@ -1,5 +1,10 @@
 import '../../../globals.css';
-import { getTickerData, getTickerBalance } from '@/actions/actions';
+import {
+  getTickerData,
+  getTickerBalance,
+  handleAddTokenToDB,
+} from '@/actions/actions';
+import { findTokenInDB } from '@/db/supabase/utils/database-helpers';
 
 interface PageProps {
   params: { ticker: string };
@@ -10,6 +15,9 @@ export default async function TickerPage(props: PageProps) {
   const ticker = props.params.ticker.toLowerCase();
   const address = props.searchParams?.address;
   const tickerData = await getTickerData(ticker);
+  //fetch to see if token is in database, if so fill in a heart or something
+  const tokenFavorited = await findTokenInDB(ticker);
+  let userBalance = '';
 
   if (tickerData.error) {
     return (
@@ -36,9 +44,18 @@ export default async function TickerPage(props: PageProps) {
 
   const balanceData = await getTickerBalance(address as string, ticker);
   const tickerInfo = tickerData.result;
+
+  if (balanceData.error === 'no balance found') {
+    userBalance = '0';
+  } else if (balanceData.error) {
+    userBalance = 'error retrieving user balance';
+  } else {
+    userBalance = balanceData.result[0].available_balance;
+  }
+
   return (
     <main>
-      <div>
+      <div className="text-white">
         <h2>Ticker: {tickerInfo.original_tick}</h2>
         <p>Max Supply: {tickerInfo.max_supply}</p>
         <p>Remaining Supply: {tickerInfo.max_supply}</p>
@@ -52,13 +69,45 @@ export default async function TickerPage(props: PageProps) {
           </p>
         ) : (
           <>
-            <p>Your Overall Balance: {balanceData.result[0].overall_balance}</p>
-            <p>
-              Available Balance To Transer:{' '}
-              {balanceData.result[0].available_balance}
-            </p>
+            <p>Your Overall Balance: {userBalance}</p>
+            <p>Available Balance To Transer: {userBalance}</p>
           </>
         )}
+        {tokenFavorited ? <p>true</p> : <p>false</p>}
+        <form action={handleAddTokenToDB}>
+          <input
+            hidden={true}
+            value={tickerInfo.original_tick}
+            name={'ticker'}
+            readOnly
+          ></input>
+
+          <input
+            hidden={true}
+            value={tickerInfo.original_tick}
+            name={'name'}
+            readOnly
+          ></input>
+
+          <input
+            hidden={true}
+            value={userBalance}
+            name={'user_balance'}
+            readOnly
+          ></input>
+
+          <input
+            hidden={true}
+            value={tickerInfo.max_supply}
+            name={'total_supply'}
+            readOnly
+          ></input>
+
+          <button>Add to token favorite</button>
+        </form>
+        {/* <form action={handleAdd}>
+          <button onClick={handleDelete}>Remove token from favorite</button>
+        </form> */}
       </div>
     </main>
   );
