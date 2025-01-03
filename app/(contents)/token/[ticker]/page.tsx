@@ -150,11 +150,11 @@ export default function TickerPage(props: PageProps) {
   return (
     <main>
       <div className="mt-20 flex flex-col items-center text-white">
-        <Card className="w-[50rem] h-[28rem] bg-black text-white">
-          <CardHeader className="flex flex-row mt-4">
-            <div className='mr-3'>{tokenFavorited && <Heart />}</div>
-            <CardTitle className='mr-2'>{tickerInfo?.original_tick}</CardTitle>
-            <CardDescription>{`Ticker Symbol: ${tickerInfo?.original_tick}`}</CardDescription>
+        <Card className="h-[28rem] w-[50rem] border-white/[.30] bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+          <CardHeader className="mt-4 flex flex-row">
+            <div className="mr-3">{tokenFavorited && <Heart color="red" fill="red" />}</div>
+            <CardTitle className="mr-2">{tickerInfo?.original_tick}</CardTitle>
+            <CardDescription>Ticker Symbol: {`${tickerInfo?.original_tick}`}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center">
             <p>Max Supply: {tickerInfo?.max_supply.slice(0, 8)}</p>
@@ -176,8 +176,8 @@ export default function TickerPage(props: PageProps) {
             )}
           </CardContent>
           <CardFooter className="flex flex-col items-center space-y-4">
-            <Button onClick={handleAddTokenToDB}>Add to token favorite</Button>
-            <Button onClick={handleDeleteTokenFrmDB}>
+            <Button className="w-[17rem] bg-sky-500 p-5 hover:bg-sky-800" onClick={handleAddTokenToDB}>Add to token favorite</Button>
+            <Button className="w-[17rem] bg-sky-500 p-5 hover:bg-sky-800" onClick={handleDeleteTokenFrmDB}>
               Remove Token from Favorites
             </Button>
           </CardFooter>

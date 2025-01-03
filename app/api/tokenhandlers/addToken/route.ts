@@ -6,9 +6,6 @@ export async function POST(req: NextRequest) {
   try {
     const { ticker, name, user_balance, total_supply } = await req.json();
 
-    console.log('within addToken route.ts');
-    console.log({ ticker, name, user_balance, total_supply })
-
     const response = await addTokenToDB(
       ticker,
       name,

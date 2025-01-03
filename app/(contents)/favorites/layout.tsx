@@ -5,8 +5,8 @@ import MainHeader from "@/components/main-header"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Token Search',
-  description: 'Page to find out more information about BRC20 tokens and current balances',
+  title: 'Favortie Tokens',
+  description: 'Page to see information on user\'s favorite BRC20 tokens and current balances',
 }
 
 export default function RootLayout({

@@ -7,6 +7,17 @@ export async function addTokenToDB(
   total_supply: string
 ) {
   const supabase = await createClient();
+
+  const { data: found, error: foundError } = await supabase
+    .from('tokens')
+    .select()
+    .eq('ticker', ticker);
+
+  console.log({found})
+  if(found){
+    return 'data already added'
+  }
+
   const { error } = await supabase
     .from('tokens')
     .insert({ ticker, name, user_balance, total_supply });
@@ -26,7 +37,7 @@ export async function findTokenInDB(ticker: string) {
   
   const { data, error } = await supabase
     .from('tokens')
-    .select('*')
+    .select()
     .eq('ticker', ticker);
 
 
