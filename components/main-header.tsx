@@ -8,7 +8,7 @@ export default function MainHeader() {
   const { currentUser } = useContext(UserContext);
   return (
     <header id="main-header">
-      <nav className="mt-2 flex flex-wrap items-center space-x-[32rem] text-white">
+      <nav className="mt-2 flex flex-wrap items-center space-x-[35rem] text-white">
         <div className="ml-5 flex justify-start text-2xl font-bold">
           <NavLink href={'/'}>OB NEXT</NavLink>
         </div>

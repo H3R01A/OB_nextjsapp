@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Heart } from 'lucide-react';
-
 import { useEffect, useState } from 'react';
 import { WalletBalance, TickerInfo } from '../../../../utils/types';
 import { ThreeCircles } from 'react-loader-spinner';
