@@ -5,7 +5,7 @@ import { ThreeCircles } from 'react-loader-spinner';
 export default function WelcomePageLoading() {
   return (
     <>
-      <h1>Teleporting you to home base...</h1>
+      <h1 className='text-white flex items-center'>Teleporting you to home base...</h1>
       <ThreeCircles
         visible={true}
         height="100"

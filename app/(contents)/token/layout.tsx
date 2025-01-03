@@ -1,8 +1,6 @@
-import { Inter } from "next/font/google";
 
 import MainHeader from "@/components/main-header"
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'Token Search',

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import '../globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import MainHeader from '@/components/main-header';
 
 export const metadata: Metadata = {
   title: 'OB Next App',
@@ -16,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-zinc-800">{children}</body>
+      <body className="bg-zinc-800">
+        <MainHeader />
+        {children}
+      </body>
     </html>
   );
 }

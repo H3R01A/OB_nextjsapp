@@ -4,11 +4,7 @@ import xss from 'xss';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { WalletBalance, TickerInfo } from '../utils/types';
-import {
-  addTokenToDB,
-  findTokenInDB,
-  deleteTokenFrmDB,
-} from '@/db/supabase/utils/database-helpers';
+
 
 export async function getBicoinBlockData() {
   const response = await fetch(`https://blockchain.info/q/getblockcount`, {
@@ -111,40 +107,4 @@ export async function getOrderData(id: string) {
   }
 
   return await response.json();
-}
-
-export async function handleAddTokenToDB(formData: FormData) {
-  const ticker = formData.get('ticker');
-  const name = formData.get('name');
-  const user_balance = formData.get('user_balance');
-  const total_supply = formData.get('total_supply');
-
-  if(typeof ticker !== "string"){
-    throw new Error('Invalid ticker input');
-  }
-
-  if(typeof name !== "string"){
-    throw new Error('Invalid name input');
-  }
-
-  if(typeof user_balance !== "string"){
-    throw new Error('Invalid user balance input');
-  }
-
-  if(typeof total_supply !== "string"){
-    throw new Error('Invalid total supply input');
-  }
-
-  return await addTokenToDB(ticker, name, user_balance, total_supply);
-}
-
-
-export async function handleDeleteTokenFrmDB(formData: FormData) {
-  const ticker = formData.get('ticker');
-
-  if(typeof ticker !== "string"){
-    throw new Error('Invalid ticker input');
-  }
-
-  return await deleteTokenFrmDB(ticker);
 }

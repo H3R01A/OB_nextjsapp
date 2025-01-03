@@ -5,16 +5,35 @@ import '../globals.css';
 import { Button } from '@/components/ui/button';
 import { WalletCards } from 'lucide-react';
 import { useLaserEyes, UNISAT } from '@omnisat/lasereyes';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '@/utils/context';
 
 export default function WelcomePage() {
   const { connect, connected, address, balance } = useLaserEyes();
   const [currentBitcoinPrice, setcurrentBitcoinPrice] = useState('');
   const [currentBitcoinBlock, setcurrentBitcoinBlock] = useState('');
 
-  const handleConnect = () => {
-    connect(UNISAT);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  console.log({ currentUser });
+  console.log({ balance });
+
+  const handleConnect = async () => {
+    try {
+      await connect(UNISAT);
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    }
   };
+
+  useEffect(() => {
+    if (connected && address && currentUser.address !== address) {
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        address,
+      }));
+    }
+  }, [connected, address, setCurrentUser, currentUser.address]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,30 +48,33 @@ export default function WelcomePage() {
       }
     };
 
-    void fetchData()
+    void fetchData();
   }, []);
 
   return (
     <main>
-      <div className="mt-20 flex flex-col items-center text-2xl text-white">
-        <h1>Welcome to OB Next! Let&apos;s Get Started!</h1>
-        <div className="mt-6 text-xl text-blue-200 hover:text-blue-700 hover:underline">
+      <div className="mt-48 flex flex-col items-center text-2xl text-white">
+        <h2>Let&apos;s Get Started!</h2>
+        {/* <div className="mt-6 text-xl text-blue-200 hover:text-blue-700 hover:underline">
+          <NavLink href={'/token'}>Check Token Balance</NavLink>
+        </div>
+        <div className="text-xl text-blue-200 hover:text-blue-700 hover:underline">
           <NavLink href={'/order'}>Check Order Status</NavLink>
         </div>
         <div className="text-xl text-blue-200 hover:text-blue-700 hover:underline">
-          <NavLink href={'/token'}>Check Token Balance</NavLink>
-        </div>
-        <div className="mt-6 text-xl">
+          <NavLink href={`/favorites/${currentUser.address}`}>
+            Check Favorite tokens
+          </NavLink>
+        </div> */}
+        <div className="mt-6 text-4xl">
           Current Bitcoin price:{' '}
           {!currentBitcoinPrice
-            ? 'Current bitcoin price is not available'
+            ? 'Fetching data...'
             : `$${currentBitcoinPrice}`}
         </div>
-        <div className="text-xl">
+        <div className="text-4xl">
           Current Bitcoin Block:{' '}
-          {!currentBitcoinBlock
-            ? 'Current block information is not available'
-            : `${currentBitcoinBlock}`}
+          {!currentBitcoinBlock ? 'Fetching data...' : `${currentBitcoinBlock}`}
         </div>
         <div className="mt-6 text-lg">
           <div className="">
@@ -61,9 +83,10 @@ export default function WelcomePage() {
                 <WalletCards /> Connect Wallet
               </Button>
             ) : (
-              <div>
+              <div className='flex flex-col items-center'>
+                <p className='text-lg'>You are connected!</p>
                 <p>Connected Address: {address}</p>
-                <p>Balance: {balance?.total}</p>
+                <p>{JSON.stringify(currentUser)}</p>
               </div>
             )}
           </div>

@@ -1,5 +1,4 @@
 import '../../../globals.css';
-import classes from './page.module.css';
 import { getOrderData } from '@/actions/actions';
 
 interface PageProps {
@@ -26,7 +25,7 @@ export default async function OrderPage(props: PageProps) {
   }
 
   return (
-    <main className={classes.main}>
+    <main>
       <div>
         <h2>Order Info</h2>
         <p>Order ID: {orderData.id}</p>

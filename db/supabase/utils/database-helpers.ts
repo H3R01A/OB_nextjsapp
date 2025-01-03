@@ -7,43 +7,48 @@ export async function addTokenToDB(
   total_supply: string
 ) {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('tokens')
     .insert({ ticker, name, user_balance, total_supply });
 
-    if (error) {
-      throw Error('error attempting to add tokens to database. Look into error: ', error)
-    }
+  if (error) {
+    throw Error(
+      'error attempting to add tokens to database. Look into error: ',
+      error
+    );
+  }
 
-  return data;
+  return 'data successfully added';
 }
 
 export async function findTokenInDB(ticker: string) {
   const supabase = await createClient();
-  const {data,error} = await supabase
+  
+  const { data, error } = await supabase
     .from('tokens')
     .select('*')
-    .eq("ticker", ticker);
+    .eq('ticker', ticker);
 
-    if(data?.length === 0 || data === null || error){
-      return false
-    }
-  return true
+
+  if (data?.length === 0 || data === null || error) {
+    return false;
+  }
+  return true;
 }
 
 export async function getFavoritesFrmDB() {
   const supabase = await createClient();
-  const {data, error} = await supabase
-    .from('tokens')
-    .select()
+  const { data, error } = await supabase.from('tokens').select();
 
-    if (error) {
-      throw Error('error attempting to retrive favorite tokens from database. Look into error: ', error)
-    }
-  
-    return data;
+  if (error) {
+    throw Error(
+      'error attempting to retrive favorite tokens from database. Look into error: ',
+      error
+    );
   }
-  
+
+  return data;
+}
 
 export async function updateTokenInDB(ticker: string, update: string) {
   const supabase = await createClient();
@@ -52,19 +57,19 @@ export async function updateTokenInDB(ticker: string, update: string) {
     .update({ ticker })
     .eq(`${update}`, update);
 
-    if (error) {
-      throw Error('error attempting to update database. Look into error: ', error)
-    }
+  if (error) {
+    throw Error(
+      'error attempting to update database. Look into error: ',
+      error
+    );
+  }
 
   return data;
 }
 
 export async function deleteTokenFrmDB(ticker: string) {
   const supabase = await createClient();
-  const response = await supabase
-    .from('tokens')
-    .delete()
-    .eq(`${ticker}`, ticker);
+  const response = await supabase.from('tokens').delete().eq('ticker', ticker);
 
   return response;
 }
