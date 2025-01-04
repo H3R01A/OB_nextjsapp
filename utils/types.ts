@@ -27,6 +27,31 @@ export interface TickerInfo {
   };
 }
 
+export interface OrderInfo {
+  id: string;
+  charge: {
+    status: string;
+    fiat_value: number;
+  };
+  orderType: string;
+  baseFee: number;
+  chainFee: number;
+  status: string;
+  error: string;
+  completed: boolean;
+  fee: number;
+  inscribedCount: number;
+}
+
+export interface TokenInfo {
+  id: number;
+  name: string;
+  ticker: string;
+  total_supply: string;
+  user_balance: string;
+  user_notes: string | null;
+}
+
 export interface User {
   address: string;
 }
@@ -44,6 +69,6 @@ export interface AddTokenRequest {
   total_supply: string;
 }
 
-export interface TokenRequest{
-  ticker: string
+export interface TokenRequest {
+  ticker: string;
 }

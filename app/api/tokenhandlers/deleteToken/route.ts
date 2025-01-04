@@ -14,9 +14,11 @@ export async function POST(req: NextRequest) {
       throw new Error('Invalid request payload');
     }
 
+
     const data = await deleteTokenFrmDB(ticker);
 
-    console.log(`this is the response from delete from token ${data}`);
+    console.log(`this is the response from delete from token`);
+    console.log(data)
 
     return NextResponse.json({ status: 200 });
   } catch (error) {

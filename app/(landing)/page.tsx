@@ -26,12 +26,12 @@ import {
 const chartConfig = {
   price: {
     label: 'Bitcoin Price',
-    color: '#F7931A',
+    color: 'var(--bitcoin)',
   },
   block: {
     label: 'Bitcoin Block Height',
-    color: 'hsl(198.6 88.7% 48.4%)',
-  },
+    color: 'var(--block)',
+  }
 } satisfies ChartConfig;
 
 export default function WelcomePage() {
@@ -89,9 +89,9 @@ export default function WelcomePage() {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <Card className="w-[80%] max-w-3xl">
+        <Card className="w-[80%] max-w-3xl bg-transparent border-none text-white">
           <CardHeader>
-            <CardTitle>
+            <CardTitle className='text-white'>
               Bitcoin Price and Bitcoin Block Height Per Month
             </CardTitle>
             <CardDescription>August 2024 - January 2025</CardDescription>
@@ -99,19 +99,27 @@ export default function WelcomePage() {
           <CardContent>
             <ChartContainer config={chartConfig}>
               <BarChart accessibilityLayer data={chartData}>
-                <CartesianGrid vertical={false} />
+                <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.1)"/>
                 <XAxis
                   dataKey="month"
                   tickLine={false}
                   tickMargin={10}
-                  axisLine={false}
                   tickFormatter={(value) => value.slice(0, 3)}
+                  stroke="#ffffff"
+                  tick={{ fill: '#ffffff' }}
                 />
-                <YAxis yAxisId="left" tickFormatter={(value) => `$${value}`} />
+                <YAxis
+                  yAxisId="left"
+                  tickFormatter={(value) => `$${value}`}
+                  stroke="#ffffff"
+                  tick={{ fill: '#ffffff' }} // Add white color to left Y-axis text
+                />
                 <YAxis
                   yAxisId="right"
                   orientation="right"
                   tickFormatter={(value) => value}
+                  stroke="#ffffff"
+                  tick={{ fill: '#ffffff' }} // Add white color to left Y-axis text
                 />
                 <ChartTooltip
                   cursor={false}
@@ -122,13 +130,13 @@ export default function WelcomePage() {
                 <Bar
                   yAxisId="left"
                   dataKey="price"
-                  fill="var(--color-price)"
+                  fill="var(--bitcoin)"
                   radius={4}
                 />
                 <Bar
                   yAxisId="right"
                   dataKey="block"
-                  fill="var(--color-block)"
+                  fill="var(--block)"
                   radius={4}
                 />
               </BarChart>

@@ -54,7 +54,7 @@ export async function findTokenInDB(ticker: string): Promise<boolean> {
 
     return data !== null;
   } catch (e) {
-    const error = e as Error
+    const error = e as Error;
     throw Error(`Error with attempting to find token in database ${error}`);
   }
 }
@@ -94,21 +94,13 @@ export async function deleteTokenFrmDB(
   try {
     const supabase = await createClient();
 
-    const { error, count } = await supabase
+    const { error } = await supabase
       .from('tokens')
       .delete()
-      .eq('ticker', ticker)
-      .select('count');
+      .eq('ticker', ticker);
 
     if (error) {
       throw new Error(`Database deletion failed: ${error.message}`);
-    }
-
-    if (count === 0) {
-      return {
-        success: false,
-        error: `Token ${ticker} not found`,
-      };
     }
 
     return {

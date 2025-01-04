@@ -11,13 +11,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
+import { TokenInfo } from '@/utils/types';
 
 interface PageProps {
   params: { address: string };
 }
 
 export default function FavoritesPage(props: PageProps) {
-  const [tokens, setTokens] = useState<any[]>([]);
+  const [tokens, setTokens] = useState<TokenInfo[]>([]);
   const userAddress = props.params.address;
 
   const handleDeleteTokenFrmDB = async (index: number) => {
@@ -76,36 +77,67 @@ export default function FavoritesPage(props: PageProps) {
     );
   }
 
+  console.log(tokens)
   return (
     <main className="container mx-auto px-4">
       <div className="mt-20 flex flex-col items-center text-white">
         <h1 className="mb-24 text-3xl font-bold">Favorites</h1>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {tokens.map((token, index) => (
-            <Card
-              className="h-[22rem] border-white/[.30] bg-gradient-to-b from-gray-800 to-gray-900 text-white"
-              key={index}
-            >
-              <CardHeader>
-                <CardTitle className="text-xl">{token.name}</CardTitle>
-                <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker}`}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-sm">{`Total Token Supply: ${token.total_supply.slice(0, 8)}`}</p>
-                <p className="text-sm">{`Wallet Balance: ${token.user_balance}`}</p>
-                <p className="text-sm">{`Wallet Address: ${userAddress.slice(0, 4)}...${userAddress.slice(-5)}`}</p>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  variant="secondary"
-                  className="mt-8 w-full bg-sky-500 p-5 hover:bg-sky-800"
-                  onClick={() => handleDeleteTokenFrmDB(index)}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:justify-items-center">
+          {tokens.length == 1 ? (
+            <div className="lg:col-start-2">
+              {tokens.map((token, index) => (
+                <Card
+                  className="h-[22rem] border-white/[.30] bg-gradient-to-b from-gray-800 to-gray-900 text-white"
+                  key={index}
                 >
-                  Remove from Favorites
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+                  <CardHeader>
+                    <CardTitle className="text-xl">{token.name}</CardTitle>
+                    <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker}`}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm">{`Total Token Supply: ${token.total_supply.slice(0, 8)}`}</p>
+                    <p className="text-sm">{`Wallet Balance: ${token.user_balance}`}</p>
+                    <p className="text-sm">{`Wallet Address: ${userAddress.slice(0, 4)}...${userAddress.slice(-5)}`}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button
+                      variant="secondary"
+                      className="mt-8 w-full bg-sky-500 p-5 hover:bg-sky-800"
+                      onClick={() => handleDeleteTokenFrmDB(index)}
+                    >
+                      Remove from Favorites
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            tokens.map((token, index) => (
+              <Card
+                className="h-[22rem] border-white/[.30] bg-gradient-to-b from-gray-800 to-gray-900 text-white"
+                key={index}
+              >
+                <CardHeader>
+                  <CardTitle className="text-xl">{token.name}</CardTitle>
+                  <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker}`}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm">{`Total Token Supply: ${token.total_supply.slice(0, 8)}`}</p>
+                  <p className="text-sm">{`Wallet Balance: ${token.user_balance}`}</p>
+                  <p className="text-sm">{`Wallet Address: ${userAddress.slice(0, 4)}...${userAddress.slice(-5)}`}</p>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    variant="secondary"
+                    className="mt-8 w-full bg-sky-500 p-5 hover:bg-sky-800"
+                    onClick={() => handleDeleteTokenFrmDB(index)}
+                  >
+                    Remove from Favorites
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))
+          )}
         </div>
       </div>
     </main>

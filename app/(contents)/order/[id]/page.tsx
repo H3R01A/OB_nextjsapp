@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { OrderInfo } from '@/utils/types';
 
 interface PageProps {
   params: { id: string };
@@ -22,7 +23,7 @@ enum OrderStatus {
 export default async function OrderPage(props: PageProps) {
   const orderID = props.params.id;
 
-  const orderData = await getOrderData(orderID);
+  const orderData: OrderInfo = await getOrderData(orderID);
 
   if (orderData.status === OrderStatus.ERROR) {
     return (

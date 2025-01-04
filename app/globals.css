@@ -27,7 +27,9 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --bitcoin: hsl(33, 93%, 54%);
+    --block: hsl(198.6 88.7% 48.4%);
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -64,3 +66,4 @@
     @apply bg-background text-foreground;
   }
 }
+
