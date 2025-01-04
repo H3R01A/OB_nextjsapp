@@ -13,9 +13,8 @@ export async function addTokenToDB(
     .select()
     .eq('ticker', ticker);
 
-  console.log({found})
-  if(found){
-    return 'data already added'
+  if (found?.length > 0) {
+    return 'data already added';
   }
 
   const { error } = await supabase
@@ -34,12 +33,11 @@ export async function addTokenToDB(
 
 export async function findTokenInDB(ticker: string) {
   const supabase = await createClient();
-  
+
   const { data, error } = await supabase
     .from('tokens')
     .select()
     .eq('ticker', ticker);
-
 
   if (data?.length === 0 || data === null || error) {
     return false;

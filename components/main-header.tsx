@@ -1,6 +1,5 @@
 'use client';
 import NavLink from './nav-link';
-import WallectConnect from './wallet-connect';
 import { UserContext } from '@/utils/context';
 import { useContext } from 'react';
 import { User } from 'lucide-react';
@@ -33,14 +32,17 @@ export default function MainHeader() {
         </div>
 
         {/* Right section */}
-        <div className="flex-none">
-          <User className="h-5 w-20" />
-          {currentUser.address && (
+        <div className="flex">
+          {currentUser.address ? (
             <div className="flex items-center space-x-4">
               <span className="text-sm">
                 {`${currentUser.address.slice(0, 4)}...${currentUser.address.slice(-5)}`}
               </span>
               <User className="h-5 w-5" />
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              No Wallet Connected <User className="w-15 h-5" />
             </div>
           )}
         </div>

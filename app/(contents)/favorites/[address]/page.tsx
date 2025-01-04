@@ -1,5 +1,5 @@
+'use client';
 import '../../../globals.css';
-import { getFavoritesFrmDB } from '@/db/supabase/utils/database-helpers';
 import {
   Card,
   CardContent,
@@ -9,15 +9,73 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
+import { ThreeCircles } from 'react-loader-spinner';
+import { notFound } from 'next/navigation';
 
 interface PageProps {
   params: { address: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function FavoritesPage(props: PageProps) {
+export default function FavoritesPage(props: PageProps) {
+  const [tokens, setTokens] = useState<any[]>([]);
   const userAddress = props.params.address;
-  const tokens = await getFavoritesFrmDB();
+
+  const handleDeleteTokenFrmDB = async (index: number) => {
+    const updatedTokens = tokens.filter((_, i) => i !== index);
+    setTokens(updatedTokens);
+
+    try {
+      await fetch('/api/tokenhandlers/deleteToken', {
+        method: 'POST',
+        body: JSON.stringify({
+          ticker: tokens[index].ticker,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to delete token:', error);
+      setTokens(tokens); // Rollback to the original state
+    }
+  };
+
+  const handleFavoriteTokenFrmDB = async () => {
+    const response = await fetch('/api/tokenhandlers/favoriteToken', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return await response.json();
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await handleFavoriteTokenFrmDB();
+      setTokens(data);
+    };
+
+    void fetchData();
+  }, []);
+
+  if (tokens.length === 0) {
+    return (
+      <div className="mt-20 flex flex-col items-center text-white">
+        <p>Fetching data...</p>
+        <ThreeCircles
+          visible={true}
+          height="100"
+          width="100"
+          color="#ffffff"
+          ariaLabel="three-circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
 
   return (
     <main className="container mx-auto px-4">
@@ -39,7 +97,11 @@ export default async function FavoritesPage(props: PageProps) {
                 <p className="text-sm">{`Wallet Address: ${userAddress.slice(0, 4)}...${userAddress.slice(-5)}`}</p>
               </CardContent>
               <CardFooter>
-                <Button variant="secondary" className="w-full mt-8 bg-sky-500 p-5 hover:bg-sky-800">
+                <Button
+                  variant="secondary"
+                  className="mt-8 w-full bg-sky-500 p-5 hover:bg-sky-800"
+                  onClick={() => handleDeleteTokenFrmDB(index)}
+                >
                   Remove from Favorites
                 </Button>
               </CardFooter>
@@ -50,4 +112,3 @@ export default async function FavoritesPage(props: PageProps) {
     </main>
   );
 }
-
