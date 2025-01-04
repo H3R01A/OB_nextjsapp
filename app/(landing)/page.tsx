@@ -52,8 +52,6 @@ export default function WelcomePage() {
     },
   ];
 
-  const { currentUser } = useContext(UserContext);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
