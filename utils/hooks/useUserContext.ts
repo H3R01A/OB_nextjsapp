@@ -1,0 +1,10 @@
+import { useContext } from 'react';
+import { UserContext } from '@/utils/context';
+
+export function useUserContext() {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUserContext must be used within a UserContext.Provider');
+  }
+  return context;
+}

@@ -1,21 +1,15 @@
 'use client';
 import WalletConnect from '@/components/wallet-connect';
-import { useContext, useEffect } from 'react';
-import { UserContext } from '@/utils/context';
+import { useEffect } from 'react';
+import { useUserContext } from '@/utils/hooks/useUserContext';
 import { useRouter } from 'next/navigation';
 
 export default function FavoritesFallback() {
-  const { currentUser } = useContext(UserContext);
-
+  const { currentUser } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
-    console.log('this is currentUser address');
-    console.log(currentUser?.address);
     if (currentUser?.address) {
-      console.log('this is currentUser address after conditional');
-      console.log(currentUser?.address);
-      // Redirect to `/favorites/${currentUser.address}`
       router.push(`/favorites/${currentUser.address}`);
     }
   }, [currentUser?.address, router]); // Run this effect when `currentUser.address` changes

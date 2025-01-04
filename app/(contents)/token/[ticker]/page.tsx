@@ -39,7 +39,7 @@ export default function TickerPage(props: PageProps) {
     await fetch('/api/tokenhandlers/addToken', {
       method: 'POST',
       body: JSON.stringify({
-        ticker: tickerInfo?.original_tick,
+        ticker: tickerInfo?.original_tick.toLowerCase(),
         name: tickerInfo?.original_tick,
         user_balance: userBalance,
         total_supply: tickerInfo?.max_supply,
@@ -94,7 +94,6 @@ export default function TickerPage(props: PageProps) {
 
       setBalanceData(await getTickerBalance(address as string, ticker));
 
-      //fetch to see if token is in database, if so fill in a heart or something
       setTokenFavorited(await handlefindToken(ticker));
     };
 

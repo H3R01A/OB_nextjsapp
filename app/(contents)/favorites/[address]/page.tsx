@@ -11,7 +11,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
-import { notFound } from 'next/navigation';
 
 interface PageProps {
   params: { address: string };

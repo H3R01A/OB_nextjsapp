@@ -1,9 +1,7 @@
 'use client';
 import { getBicoinBlockData, getBitcoinPriceData } from '@/actions/actions';
 import '../globals.css';
-import { useLaserEyes } from '@omnisat/lasereyes';
-import { useEffect, useState, useContext } from 'react';
-import { UserContext } from '@/utils/context';
+import { useEffect, useState } from 'react';
 import WallectConnect from '@/components/wallet-connect';
 import { TrendingUp } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';

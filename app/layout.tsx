@@ -5,6 +5,7 @@ import './globals.css';
 import { LaserEyesProvider, MAINNET, TESTNET } from '@omnisat/lasereyes';
 import { useState } from 'react';
 import { UserContext } from '@/utils/context';
+import { User } from '@/utils/types';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [currentUser, setCurrentUser] = useState({address: ""});
+  const [currentUser, setCurrentUser] = useState<User>({address: ""});
 
   return (
     <html lang="en">

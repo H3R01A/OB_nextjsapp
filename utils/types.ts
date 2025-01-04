@@ -6,7 +6,7 @@ export interface WalletBalance {
       available_balance: string;
       block_height: number;
       tick: string;
-    }
+    },
   ];
 }
 
@@ -25,4 +25,25 @@ export interface TickerInfo {
     deploy_inscription_id: string;
     block_height: number;
   };
+}
+
+export interface User {
+  address: string;
+}
+
+export type UserContextType = {
+  currentUser: User;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User>>;
+};
+
+// Define a type for the expected request payload
+export interface AddTokenRequest {
+  ticker: string;
+  name: string;
+  user_balance: string;
+  total_supply: string;
+}
+
+export interface TokenRequest{
+  ticker: string
 }
