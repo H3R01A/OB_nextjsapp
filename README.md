@@ -1,4 +1,4 @@
-# Welcome to OB Next! 
+# Welcome to OB NEXT! 
 Your one stop shop for checking your order statues and BRC20 token balances. Please read on to find out more how to get started.
 
 ## Getting started
@@ -25,15 +25,17 @@ Now run the development server:
 npm run dev
 ```
 
-You will be greeted to a welcome page where you are able to navigate to a "Order Status" page and/or a "Token Balance" page.
+You will be greeted to a welcome page where you are able to get started with OB NEXT!
 
 
 ## Getting to know the app
 
 ### Welcome Page
-You are able to select which part of the app you want to navigate to! There are two options available: "Check Order Status" and "Check Token Balance". You will also find the current bitcoin price and block being updated in real time and any time you navigate back to the home page. 
+Users will have the ability to connect their Bitcoin Web3 wallet as well as have the ability to check order status, token balances and their saved favorite tokens. Users will also find the current bitcoin price and block height being updated in real time as well as a chart showing historic prices and heights from the past 6 months. 
+
 >NOTE: Bicoin price should update every 1 minute and the current Bitcoin block should update every 10 mins based on caching implementation.
 
+>NOTE: "Check Favorites" section is available to users AFTER they have connected their Web3 wallet.
 
 >IMPORTANT!: In order to visualize the current bitcoin price, you will need access to an API that will provide the data. Please refer to the `getBitcoinPriceData` server action functions within the `actions` directory for more information on how to configure your data fetch calls.
 
@@ -58,6 +60,12 @@ Enter a BR20 ticker (ex. TRIO) and an active wallet address to check the current
 
 >IMPORTANT! OrdinalsBot API Key required
 
+### Favorites
+As part of the January 2025 update, after users successfully connect their Bitcoin wallet, they will now have the ability to favorite tokens while reviewing token balances. These favorite tokens will then appear in the brand new favorites section.
+
+>HOW TO ADD FAVORITE TOKEN: After searching for a token balance, select "Add Token to Favorites" and you will see a heart appear on the token info card. Once added, a user will be able to navigate to the "Favorites" section to review saved tokens. 
+
+>IMPORTANT! A user must connect their wallet first in order to use this feature
 
 ## Thoughts behind the code
 Throughout the codebase you will find the use of the following implementations for the respective reasons:
@@ -72,11 +80,28 @@ Throughout the codebase you will find the use of the following implementations f
 
 
 
+## January 2025 Release Notes
+
+New Features and New UI/UX!
+
+Highlights
+- Ability to connect your Bitcoin Web3 wallet!
+- Ability to favorite tokens to review later in the new favorites section
+- UI/UX Revamp 
+- Improved Type Safety
+
+Made possible by the below tech stack additions
+
+- LaserEyes - [Read more here](https://www.lasereyes.build/)
+- Supabase - [Read more here](https://supabase.com/docs)
+- shadcn/ui - [Read more here](https://ui.shadcn.com/)
+- Tailwind - [Read more here](https://tailwindcss.com/)
+
+
 ## Future DLC
 
-- Enhanced Error handling and Typing
-- Ability to connect your Web3 wallet
-- Added visualizations to enhance review of BRC20 ticker and order information
-- Updated overall styling
+- Enhanced Performance, Error Handling and Typing
+- Continued Improvements to UX/UI
+- Much more
 
 

@@ -176,7 +176,7 @@ export default function TickerPage(props: PageProps) {
             )}
           </CardContent>
           <CardFooter className="flex flex-col items-center space-y-4">
-            <Button className="w-[17rem] bg-sky-500 p-5 hover:bg-sky-800" onClick={handleAddTokenToDB}>Add to token favorite</Button>
+            <Button className="w-[17rem] bg-sky-500 p-5 hover:bg-sky-800" onClick={handleAddTokenToDB}>Add Token to Favorites</Button>
             <Button className="w-[17rem] bg-sky-500 p-5 hover:bg-sky-800" onClick={handleDeleteTokenFrmDB}>
               Remove Token from Favorites
             </Button>
