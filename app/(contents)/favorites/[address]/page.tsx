@@ -92,7 +92,8 @@ export default function FavoritesPage(props: PageProps) {
                 >
                   <CardHeader>
                     <CardTitle className="text-xl">{token.name}</CardTitle>
-                    <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker}`}</CardDescription>
+
+                    <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker.toUpperCase()}`}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-sm">{`Total Token Supply: ${token.total_supply.slice(0, 8)}`}</p>
@@ -119,7 +120,7 @@ export default function FavoritesPage(props: PageProps) {
               >
                 <CardHeader>
                   <CardTitle className="text-xl">{token.name}</CardTitle>
-                  <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker}`}</CardDescription>
+                  <CardDescription className="text-gray-300">{`Ticker Symbol: ${token.ticker.toUpperCase()}`}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm">{`Total Token Supply: ${token.total_supply.slice(0, 8)}`}</p>

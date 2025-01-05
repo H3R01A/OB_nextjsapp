@@ -31,7 +31,7 @@ You will be greeted to a welcome page where you are able to get started with OB 
 ## Getting to know the app
 
 ### Welcome Page
-Users will have the ability to connect their Bitcoin Web3 wallet as well as have the ability to check order status, token balances and their saved favorite tokens. Users will also find the current bitcoin price and block height being updated in real time as well as a chart showing historic prices and heights from the past 6 months. 
+Users have the ability to connect their Bitcoin Web3 wallet as well as have the ability to check order status, token balances and their saved favorite tokens. Users will also find the current bitcoin price and block height being updated in real time as well as a chart showing historic prices and heights from the past 6 months. 
 
 >NOTE: Bicoin price should update every 1 minute and the current Bitcoin block should update every 10 mins based on caching implementation.
 
@@ -95,7 +95,7 @@ Made possible by the below tech stack additions
 - LaserEyes - [Read more here](https://www.lasereyes.build/)
 - Supabase - [Read more here](https://supabase.com/docs)
 - shadcn/ui - [Read more here](https://ui.shadcn.com/)
-- Tailwind - [Read more here](https://tailwindcss.com/)
+- Tailwind CSS - [Read more here](https://tailwindcss.com/)
 
 
 ## Future DLC
