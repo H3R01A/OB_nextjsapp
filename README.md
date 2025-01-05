@@ -94,8 +94,8 @@ Made possible by the below tech stack additions
 
 - LaserEyes - [Read more here](https://www.lasereyes.build/)
 - Supabase - [Read more here](https://supabase.com/docs)
-- shadcn/ui - [Read more here](https://ui.shadcn.com/)
-- Tailwind CSS - [Read more here](https://tailwindcss.com/)
+- ShadCN - [Read more here](https://ui.shadcn.com/)
+- Tailwind - [Read more here](https://tailwindcss.com/)
 
 
 ## Future DLC
